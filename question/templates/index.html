@@ -1,0 +1,31 @@
+<script>
+    let data
+    // const dataContainer = document.getElementById('data-container');
+
+    async function fetchquestions(){
+        const response = await fetch('http://127.0.0.1:8000/api/questions');
+        data = await response.json();
+        console.log(data)
+        displayData(data);
+        
+    
+    }
+    // document.getElementById("output").innerHTML = {'question':{data}};
+
+    function displayData(data) {
+        const dataContainer = document.getElementById('data-container');
+  // Clear any previous content
+//   dataContainer.textContent = '';
+        let result = "''"
+  data.forEach(item => {
+    // let dataElement = '${item.q}';
+    result = result + item.q;
+
+    // console.log(result)
+    dataContainer.innerHTML = result;
+    // console.log(item.q,"DiSPLAY DATA")
+  });}
+</script>
+<p id="data-container">Check</p><br><br>
+
+<button onclick="fetchquestions()" >fectch Question</button>

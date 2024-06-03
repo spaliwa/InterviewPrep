@@ -1,0 +1,16 @@
+FROM python:3.11-slim-buster  
+# Use a slim Python base image for efficiency
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000  
+#Expose the port where Django listens for requests
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "InterviewPrep.wsgi:application"]  
+# Run Gunicorn web server
